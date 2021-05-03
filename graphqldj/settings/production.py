@@ -1,4 +1,7 @@
-from .base import *
+try:
+    from .base import *
+except ImportError:
+    pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -13,7 +16,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'graphqldjdb',
         'USER': 'graphqldj',
-        'PASSWORD': 'Password0001!!',
+        'PASSWORD': get_secret('DB_PASSWORD'),
     }
 }
 
@@ -21,3 +24,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = get_secret('SECRET_KEY')
